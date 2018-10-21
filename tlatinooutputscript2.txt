@@ -1,0 +1,216 @@
+--------------
+LOAD DATA LOCAL INFILE '/home/centos/assignment2/loaddata.txt' INTO TABLE product FIELDS TERMINATED BY ','
+--------------
+
+--------------
+SELECT * FROM product
+--------------
+
+productID	description	cost	quantity
+11	Bike	150	200
+12	Socks	2	100
+78	Knee Pads	12.15	70
+88	Roller Blades	75	89
+99	Helmet	29	30
+--------------
+INSERT INTO product VALUES(66, 'Elbow Pads', 14.25, 120)
+--------------
+
+--------------
+INSERT INTO product VALUES(57, 'Dog Roller Blades', 59.99, 20)
+--------------
+
+--------------
+INSERT INTO agent VALUES('99', 'Hugh', 'Grant', 'Springfield', '16')
+--------------
+
+--------------
+INSERT INTO agent VALUES('22', 'Courtney', 'Cox', 'New York', '25')
+--------------
+
+--------------
+INSERT INTO agent VALUES('66', 'Rosie', 'ODonnell', 'Ottawa', '100')
+--------------
+
+--------------
+INSERT INTO agent VALUES('33', 'David', 'Letterman', 'Bedrock', '100')
+--------------
+
+--------------
+INSERT INTO agent VALUES('11', 'Regis', 'Philbin',  'Boston', '33')
+--------------
+
+--------------
+INSERT INTO agent VALUES('12', 'Rosie', 'Cox',  'Ottawa', '50')
+--------------
+
+--------------
+INSERT INTO agent VALUES('24', 'Tyler', 'Latino', 'London', '150')
+--------------
+
+--------------
+INSERT INTO customer VALUES('21', 'Homer', 'Simpson', 'Springfield', '686-8956')
+--------------
+
+--------------
+INSERT INTO customer VALUES('31', 'Sideshow', 'Bob', 'Springfield', '686-5555')
+--------------
+
+--------------
+INSERT INTO customer VALUES('12', 'Monty', 'Burns', 'Springfield', '789-0000')
+--------------
+
+--------------
+INSERT INTO customer VALUES('15', 'Fred', 'Flintstone', 'Bedrock', '777-2345')
+--------------
+
+--------------
+INSERT INTO customer VALUES('13', 'Super', 'Man', 'Kypto', '888-1234')
+--------------
+
+--------------
+INSERT INTO customer VALUES('10', 'Barney', 'Rubble', 'Bedrock', '777-1234')
+--------------
+
+--------------
+INSERT INTO customer VALUES('14', 'Peter', 'Griffens', 'Providence', '987-4567')
+--------------
+
+--------------
+INSERT INTO purchase(customerID, productID, quantity) VALUES('21', '99', 20)
+--------------
+
+--------------
+INSERT INTO purchase(customerID, productID, quantity) VALUES('21', '12', 14)
+--------------
+
+--------------
+INSERT INTO purchase(customerID, productID, quantity) VALUES('21', '66', 10)
+--------------
+
+--------------
+INSERT INTO purchase(customerID, productID, quantity) VALUES('31', '99', 1)
+--------------
+
+--------------
+INSERT INTO purchase(customerID, productID, quantity) VALUES('31', '12', 2)
+--------------
+
+--------------
+INSERT INTO purchase(customerID, productID, quantity) VALUES('31', '78', 4)
+--------------
+
+--------------
+INSERT INTO purchase(customerID, productID, quantity) VALUES('31', '66', 2)
+--------------
+
+--------------
+INSERT INTO purchase(customerID, productID, quantity) VALUES('15', '66', 2)
+--------------
+
+--------------
+INSERT INTO purchase(customerID, productID, quantity) VALUES('15', '78', 2)
+--------------
+
+--------------
+INSERT INTO purchase(customerID, productID, quantity) VALUES('14', '66', 19)
+--------------
+
+--------------
+INSERT INTO workswith(customerID, agentID) VALUES('21', '99')
+--------------
+
+--------------
+INSERT INTO workswith(customerID, agentID) VALUES('12', '99')
+--------------
+
+--------------
+INSERT INTO workswith(customerID, agentID) VALUES('14', '99')
+--------------
+
+--------------
+INSERT INTO workswith(customerID, agentID) VALUES('13', '33')
+--------------
+
+--------------
+INSERT INTO workswith(customerID, agentID) VALUES('15', '11')
+--------------
+
+--------------
+INSERT INTO workswith(customerID, agentID) VALUES('10', '11')
+--------------
+
+--------------
+INSERT INTO workswith(customerID, agentID) VALUES('31', '66')
+--------------
+
+--------------
+SELECT * FROM product
+--------------
+
+productID	description	cost	quantity
+11	Bike	150	200
+12	Socks	2	100
+57	Dog Roller Blades	59.99	20
+66	Elbow Pads	14.25	120
+78	Knee Pads	12.15	70
+88	Roller Blades	75	89
+99	Helmet	29	30
+--------------
+SELECT * FROM customer
+--------------
+
+customerID	firstName	lastName	city	phone
+10	Barney	Rubble	Bedrock	777-1234
+12	Monty	Burns	Springfield	789-0000
+13	Super	Man	Kypto	888-1234
+14	Peter	Griffens	Providence	987-4567
+15	Fred	Flintstone	Bedrock	777-2345
+21	Homer	Simpson	Springfield	686-8956
+31	Sideshow	Bob	Springfield	686-5555
+--------------
+SELECT * FROM agent
+--------------
+
+agentID	firstName	lastName	city	commission
+11	Regis	Philbin	Boston	33
+12	Rosie	Cox	Ottawa	50
+22	Courtney	Cox	New York	25
+24	Tyler	Latino	London	150
+33	David	Letterman	Bedrock	100
+66	Rosie	ODonnell	Ottawa	100
+99	Hugh	Grant	Springfield	16
+--------------
+SELECT * FROM purchase
+--------------
+
+quantity	productID	customerID
+14	12	21
+2	12	31
+19	66	14
+2	66	15
+10	66	21
+2	66	31
+2	78	15
+4	78	31
+20	99	21
+1	99	31
+--------------
+SELECT * FROM workswith
+--------------
+
+agentID	customerID
+11	10
+99	12
+33	13
+99	14
+11	15
+99	21
+66	31
+--------------
+UPDATE customer SET 
+	firstName='Wonder',
+	lastName='Woman'
+	WHERE customerID='13'
+--------------
+

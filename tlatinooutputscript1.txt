@@ -1,0 +1,99 @@
+--------------
+SHOW DATABASES
+--------------
+
+Database
+information_schema
+mysql
+performance_schema
+tlatinoassign2db
+--------------
+DROP DATABASE IF EXISTS tlatinoassign2db
+--------------
+
+--------------
+CREATE DATABASE tlatinoassign2db
+--------------
+
+--------------
+GRANT USAGE ON *.* TO 'ta'@'localhost'
+--------------
+
+--------------
+DROP USER 'ta'@'localhost'
+--------------
+
+--------------
+CREATE USER 'ta'@'localhost' IDENTIFIED BY 'cs3319'
+--------------
+
+--------------
+GRANT ALL PRIVILEGES ON yourwesternuseridassign2db.* TO 'ta'@'localhost'
+--------------
+
+--------------
+FLUSH PRIVILEGES
+--------------
+
+--------------
+SHOW TABLES
+--------------
+
+--------------
+CREATE TABLE product(
+	productID VARCHAR(2) NOT NULL,
+	description VARCHAR(20) NOT NULL,
+	cost FLOAT NOT NULL,
+	quantity INT NOT NULL,
+	PRIMARY KEY(productID))
+--------------
+
+--------------
+CREATE TABLE agent(
+	agentID VARCHAR(2) NOT NULL,
+	firstName VARCHAR(30),
+	lastName VARCHAR(30),
+	city VARCHAR(15),
+	commission VARCHAR(3),
+	PRIMARY KEY (agentID))
+--------------
+
+--------------
+CREATE TABLE customer(
+	customerID VARCHAR(2) NOT NULL,
+	firstName VARCHAR(30),
+	lastName VARCHAR(30),
+	city VARCHAR(15),
+	phone VARCHAR(12),
+	PRIMARY KEY(customerID))
+--------------
+
+--------------
+CREATE TABLE purchase(
+	quantity INT,
+	productID VARCHAR(2) NOT NULL,
+	customerID VARCHAR(2) NOT NULL,
+	FOREIGN KEY(productID) REFERENCES product(productID),
+	FOREIGN KEY(customerID) REFERENCES customer(customerID),
+	PRIMARY KEY(productID, customerID))
+--------------
+
+--------------
+CREATE TABLE workswith(
+	agentID VARCHAR(2) NOT NULL,
+	customerID VARCHAR(2) NOT NULL,
+	FOREIGN KEY(agentID) REFERENCES agent(agentID),
+	FOREIGN KEY(customerID) REFERENCES customer(customerID),
+	PRIMARY KEY(agentID, customerID))
+--------------
+
+--------------
+SHOW TABLES
+--------------
+
+Tables_in_tlatinoassign2db
+agent
+customer
+product
+purchase
+workswith
