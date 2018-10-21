@@ -65,6 +65,8 @@ CREATE TABLE customer(
 	lastName VARCHAR(30),
 	city VARCHAR(15),
 	phone VARCHAR(12),
+	agentID VARCHAR(2),
+	FOREIGN KEY(agentID) REFERENCES agent(agentID),
 	PRIMARY KEY(customerID))
 --------------
 
@@ -79,15 +81,6 @@ CREATE TABLE purchase(
 --------------
 
 --------------
-CREATE TABLE workswith(
-	agentID VARCHAR(2) NOT NULL,
-	customerID VARCHAR(2) NOT NULL,
-	FOREIGN KEY(agentID) REFERENCES agent(agentID),
-	FOREIGN KEY(customerID) REFERENCES customer(customerID),
-	PRIMARY KEY(agentID, customerID))
---------------
-
---------------
 SHOW TABLES
 --------------
 
@@ -96,4 +89,3 @@ agent
 customer
 product
 purchase
-workswith
