@@ -1,0 +1,47 @@
+USE tlatinoassign2db;
+-- Query 1
+SELECT description FROM product;
+
+-- Query 2
+SELECT DISTINCT city FROM customer;
+
+-- Query 3
+SELECT * FROM agent ORDER BY city;
+
+-- Query 4
+SELECT firstName, lastName FROM customer WHERE city='Springfield';
+
+-- Query 5
+SELECT lastName FROM customer WHERE agentID='11';
+ 
+-- Query 6
+SELECT description FROM product WHERE description LIKE '%pad%' OR description LIKE '%Pad%';
+
+-- Query 7
+SELECT lastName, description, pur.quantity
+	FROM customer c INNER JOIN purchase pur INNER JOIN product pro 
+	ON c.customerID=pur.customerID AND pur.productID=pro.productID; 
+
+-- Query 8
+SELECT SUM(quantity) AS 'Homer\'s Total Purchases' FROM purchase p INNER JOIN customer c
+	ON c.firstName='Homer' AND c.customerID=p.customerID;
+
+-- Query 9
+SELECT DISTINCT SUM(quantity) AS 'Total purchases For', firstName, lastName From purchase p JOIN customer c
+	ON c.customerID=p.customerID GROUP BY firstName, lastName;
+
+-- Query 10
+SELECT description, pro.quantity 
+	FROM product pro LEFT JOIN purchase pur 
+	ON pro.productID=pur.productID 
+	WHERE pur.customerID IS NULL;
+
+-- Query 11
+
+
+SELECT DISTINCT description, quantity FROM product LEFT JOIN 
+	(SELECT productID FROM purchase pur JOIN customer c 
+		ON c.customerID=pur.customerID 
+		WHERE firstName='Fred' AND lastName='Flintstone') as foo 
+	ON foo.productID=product.productID 
+	WHERE foo.productID IS NULL;

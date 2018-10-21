@@ -1,0 +1,115 @@
+--------------
+SELECT description FROM product
+--------------
+
+description
+Bike
+Socks
+Dog Roller Blades
+Elbow Pads
+Knee Pads
+Roller Blades
+Helmet
+--------------
+SELECT DISTINCT city FROM customer
+--------------
+
+city
+Boston
+Springfield
+Kypto
+Providence
+--------------
+SELECT * FROM agent ORDER BY city
+--------------
+
+agentID	firstName	lastName	city	commission
+33	David	Letterman	Bedrock	100
+11	Regis	Philbin	Boston	33
+24	Tyler	Latino	London	150
+22	Courtney	Cox	New York	25
+12	Rosie	Cox	Ottawa	50
+66	Rosie	ODonnell	Ottawa	100
+99	Hugh	Grant	Springfield	16
+--------------
+SELECT firstName, lastName FROM customer WHERE city='Springfield'
+--------------
+
+firstName	lastName
+Monty	Burns
+Homer	Simpson
+Sideshow	Bob
+--------------
+SELECT lastName FROM customer WHERE agentID='11'
+--------------
+
+lastName
+Rubble
+Flintstone
+--------------
+SELECT description FROM product WHERE description LIKE '%pad%' OR description LIKE '%Pad%'
+--------------
+
+description
+Elbow Pads
+Knee Pads
+--------------
+SELECT lastName, description, pur.quantity
+	FROM customer c INNER JOIN purchase pur INNER JOIN product pro 
+	ON c.customerID=pur.customerID AND pur.productID=pro.productID
+--------------
+
+lastName	description	quantity
+Griffens	Elbow Pads	19
+Flintstone	Elbow Pads	2
+Flintstone	Knee Pads	2
+Simpson	Socks	14
+Simpson	Elbow Pads	10
+Simpson	Helmet	20
+Bob	Socks	5
+Bob	Elbow Pads	5
+Bob	Knee Pads	5
+Bob	Helmet	5
+--------------
+SELECT SUM(quantity) AS 'Homer\'s Total Purchases' FROM purchase p INNER JOIN customer c
+	ON c.firstName='Homer' AND c.customerID=p.customerID
+--------------
+
+Homer's Total Purchases
+44
+--------------
+SELECT DISTINCT SUM(quantity) AS 'Total purchases For', firstName, lastName From purchase p JOIN customer c
+	ON c.customerID=p.customerID GROUP BY firstName, lastName
+--------------
+
+Total purchases For	firstName	lastName
+4	Fred	Flintstone
+44	Homer	Simpson
+19	Peter	Griffens
+20	Sideshow	Bob
+--------------
+SELECT description, pro.quantity 
+	FROM product pro LEFT JOIN purchase pur 
+	ON pro.productID=pur.productID 
+	WHERE pur.customerID IS NULL
+--------------
+
+description	quantity
+Bike	200
+Dog Roller Blades	20
+Roller Blades	89
+--------------
+SELECT DISTINCT description, quantity FROM product LEFT JOIN 
+	(SELECT productID FROM purchase pur JOIN customer c 
+		ON c.customerID=pur.customerID 
+		WHERE firstName='Fred' AND lastName='Flintstone') as foo 
+	ON foo.productID=product.productID 
+	WHERE foo.productID IS NULL
+--------------
+
+description	quantity
+Bike	200
+Socks	100
+Dog Roller Blades	20
+Roller Blades	89
+Helmet	30
