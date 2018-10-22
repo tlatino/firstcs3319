@@ -113,3 +113,32 @@ Socks	100
 Dog Roller Blades	20
 Roller Blades	89
 Helmet	30
+--------------
+SELECT c.firstName AS 'Customer First Name', c.lastName AS 'Customer Last Name', a.firstName AS 'Agent First Name', a.lastName AS 'Agent Last Name' FROM agent a JOIN customer c WHERE c.city=a.city
+--------------
+
+Customer First Name	Customer Last Name	Agent First Name	Agent Last Name
+Barney	Rubble	Regis	Philbin
+Monty	Burns	Hugh	Grant
+Fred	Flintstone	Regis	Philbin
+Homer	Simpson	Hugh	Grant
+Sideshow	Bob	Hugh	Grant
+--------------
+SELECT SUM(quantity) AS 'All Knee Pads Purchased' FROM purchase WHERE productID='78'
+--------------
+
+All Knee Pads Purchased
+7
+--------------
+SELECT description, count(*) AS Bought FROM purchase JOIN product ON purchase.productID=product.productID GROUP BY purchase.productID HAVING Bought>3
+--------------
+
+description	Bought
+Elbow Pads	4
+--------------
+SELECT a.firstName, a.lastName FROM agent a JOIN (SELECT agentID FROM customer c JOIN purchase p ON p.customerID=c.customerID WHERE p.productID='78') AS kpb ON a.agentID=kpb.agentID
+--------------
+
+firstName	lastName
+Regis	Philbin
+Rosie	ODonnell

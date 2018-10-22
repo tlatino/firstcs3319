@@ -38,10 +38,25 @@ SELECT description, pro.quantity
 
 -- Query 11
 
-
 SELECT DISTINCT description, quantity FROM product LEFT JOIN 
 	(SELECT productID FROM purchase pur JOIN customer c 
 		ON c.customerID=pur.customerID 
 		WHERE firstName='Fred' AND lastName='Flintstone') as foo 
 	ON foo.productID=product.productID 
 	WHERE foo.productID IS NULL;
+
+-- Query 12
+
+SELECT c.firstName AS 'Customer First Name', c.lastName AS 'Customer Last Name', a.firstName AS 'Agent First Name', a.lastName AS 'Agent Last Name' FROM agent a JOIN customer c WHERE c.city=a.city;
+
+-- Query 13
+
+SELECT SUM(quantity) AS 'All Knee Pads Purchased' FROM purchase WHERE productID='78';
+
+-- Query 14
+
+SELECT description, count(*) AS Bought FROM purchase JOIN product ON purchase.productID=product.productID GROUP BY purchase.productID HAVING Bought>3;
+
+-- Query 15
+
+SELECT a.firstName, a.lastName FROM agent a JOIN (SELECT agentID FROM customer c JOIN purchase p ON p.customerID=c.customerID WHERE p.productID='78') AS kpb ON a.agentID=kpb.agentID;
