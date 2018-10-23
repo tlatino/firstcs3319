@@ -32,7 +32,9 @@ agentID	firstName	lastName	city	commission
 66	Rosie	ODonnell	Ottawa	100
 99	Hugh	Grant	Springfield	16
 --------------
-SELECT firstName, lastName FROM customer WHERE city='Springfield'
+SELECT firstName, lastName 
+	FROM customer 
+	WHERE city='Springfield'
 --------------
 
 firstName	lastName
@@ -40,14 +42,18 @@ Monty	Burns
 Homer	Simpson
 Sideshow	Bob
 --------------
-SELECT lastName FROM customer WHERE agentID='11'
+SELECT lastName 
+	FROM customer 
+	WHERE agentID='11'
 --------------
 
 lastName
 Rubble
 Flintstone
 --------------
-SELECT description FROM product WHERE description LIKE '%pad%' OR description LIKE '%Pad%'
+SELECT description 
+	FROM product 
+	WHERE description LIKE '%pad%' OR description LIKE '%Pad%'
 --------------
 
 description
@@ -71,15 +77,18 @@ Bob	Elbow Pads	5
 Bob	Knee Pads	5
 Bob	Helmet	5
 --------------
-SELECT SUM(quantity) AS 'Homer\'s Total Purchases' FROM purchase p INNER JOIN customer c
+SELECT SUM(quantity) AS 'Homer\'s Total Purchases' 
+	FROM purchase p INNER JOIN customer c
 	ON c.firstName='Homer' AND c.customerID=p.customerID
 --------------
 
 Homer's Total Purchases
 44
 --------------
-SELECT DISTINCT SUM(quantity) AS 'Total purchases For', firstName, lastName From purchase p JOIN customer c
-	ON c.customerID=p.customerID GROUP BY firstName, lastName
+SELECT DISTINCT SUM(quantity) AS 'Total purchases For', firstName, lastName 
+	FROM purchase p JOIN customer c
+	ON c.customerID=p.customerID 
+	GROUP BY firstName, lastName
 --------------
 
 Total purchases For	firstName	lastName
@@ -114,7 +123,9 @@ Dog Roller Blades	20
 Roller Blades	89
 Helmet	30
 --------------
-SELECT c.firstName AS 'Customer First Name', c.lastName AS 'Customer Last Name', a.firstName AS 'Agent First Name', a.lastName AS 'Agent Last Name' FROM agent a JOIN customer c WHERE c.city=a.city
+SELECT c.firstName AS 'Customer First Name', c.lastName AS 'Customer Last Name', a.firstName AS 'Agent First Name', a.lastName AS 'Agent Last Name' 
+	FROM agent a JOIN customer c 
+	WHERE c.city=a.city
 --------------
 
 Customer First Name	Customer Last Name	Agent First Name	Agent Last Name
@@ -124,19 +135,31 @@ Fred	Flintstone	Regis	Philbin
 Homer	Simpson	Hugh	Grant
 Sideshow	Bob	Hugh	Grant
 --------------
-SELECT SUM(quantity) AS 'All Knee Pads Purchased' FROM purchase WHERE productID='78'
+SELECT SUM(quantity) AS 'All Knee Pads Purchased' 
+	FROM purchase 
+	WHERE productID='78'
 --------------
 
 All Knee Pads Purchased
 7
 --------------
-SELECT description, count(*) AS Bought FROM purchase JOIN product ON purchase.productID=product.productID GROUP BY purchase.productID HAVING Bought>3
+SELECT description, count(*) AS Bought 
+	FROM purchase JOIN product 
+	ON purchase.productID=product.productID 
+	GROUP BY purchase.productID 
+	HAVING Bought>3
 --------------
 
 description	Bought
 Elbow Pads	4
 --------------
-SELECT a.firstName, a.lastName FROM agent a JOIN (SELECT agentID FROM customer c JOIN purchase p ON p.customerID=c.customerID WHERE p.productID='78') AS kpb ON a.agentID=kpb.agentID
+SELECT a.firstName, a.lastName 
+	FROM agent a JOIN 
+	(SELECT agentID 
+		FROM customer c JOIN purchase p 
+		ON p.customerID=c.customerID 
+		WHERE p.productID='78') AS kpb 
+	ON a.agentID=kpb.agentID
 --------------
 
 firstName	lastName
