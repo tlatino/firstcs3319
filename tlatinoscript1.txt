@@ -1,19 +1,34 @@
+-- show databases
 SHOW DATABASES;
+
+-- delete our database if it exists
 DROP DATABASE IF EXISTS tlatinoassign2db;
+
+-- create the database
 CREATE DATABASE tlatinoassign2db;
+
+-- move to the database
 USE tlatinoassign2db;
+
+-- let ta access everything
 GRANT USAGE ON *.* TO 'ta'@'localhost';
 DROP USER 'ta'@'localhost';
 CREATE USER 'ta'@'localhost' IDENTIFIED BY 'cs3319';
 GRANT ALL PRIVILEGES ON yourwesternuseridassign2db.* TO 'ta'@'localhost';
 FLUSH PRIVILEGES;
+
+-- show all tables
 SHOW TABLES;
+
+-- create the product table
 CREATE TABLE product(
 	productID VARCHAR(2) NOT NULL,
 	description VARCHAR(20) NOT NULL,
 	cost FLOAT NOT NULL,
 	quantity INT NOT NULL,
 	PRIMARY KEY(productID));
+
+-- create agent table
 CREATE TABLE agent(
 	agentID VARCHAR(2) NOT NULL,
 	firstName VARCHAR(30),
@@ -21,6 +36,8 @@ CREATE TABLE agent(
 	city VARCHAR(15),
 	commission VARCHAR(3),
 	PRIMARY KEY (agentID));
+
+-- create customer table
 CREATE TABLE customer(
 	customerID VARCHAR(2) NOT NULL,
 	firstName VARCHAR(30),
@@ -30,6 +47,8 @@ CREATE TABLE customer(
 	agentID VARCHAR(2),
 	FOREIGN KEY(agentID) REFERENCES agent(agentID),
 	PRIMARY KEY(customerID));
+
+-- create purchase table
 CREATE TABLE purchase(
 	quantity INT,
 	productID VARCHAR(2) NOT NULL,
@@ -37,5 +56,7 @@ CREATE TABLE purchase(
 	FOREIGN KEY(productID) REFERENCES product(productID),
 	FOREIGN KEY(customerID) REFERENCES customer(customerID),
 	PRIMARY KEY(productID, customerID));
+
+-- show all created tables
 SHOW TABLES;
 

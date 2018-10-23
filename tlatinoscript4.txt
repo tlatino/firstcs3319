@@ -1,0 +1,32 @@
+-- enter the correct database
+USE tlatinoassign2db; 
+
+-- show all tables
+SELECT * FROM product;
+SELECT * FROM customer;
+SELECT * FROM agent;
+SELECT * FROM purchase;
+
+-- Create a view that shows the customer first name and last name, the description of the products they have bought, the quantity of the products they have bought, the price of the product and a total cost to purchase that many items of each product. Order the view by the last name. 
+CREATE VIEW candp AS SELECT c.firstName, c.lastName, pur.productID, pur.quantity  FROM purchase pur JOIN customer c ON c.customerID=pur.customerID;
+CREATE VIEW BoughtAndPrice AS SELECT candp.firstName, candp.lastName, candp.quantity, pro.description, pro.cost, ROUND(candp.quantity * pro.cost, 2) AS Total FROM product pro JOIN candp ON pro.productID=candp.productID ORDER BY candp.lastName;
+
+-- show table BoughtAndPrice
+SELECT * FROM BoughtAndPrice;
+
+-- select table BoughtAndPrice where they spent more than $100
+SELECT * FROM BoughtAndPrice HAVING Total>100;
+
+-- deleting product I added
+DELETE FROM product WHERE description='Dog Roller Blades';
+
+-- show it was deleted
+SELECT * FROM product;
+
+-- deleting all agents from springfield
+DELETE FROM agent WHERE city='Springfield';
+
+-- show they were deleted
+SELECT * FROM agent;
+
+-- these rows were not deleted because there are other tables dependent on them as foreign keys

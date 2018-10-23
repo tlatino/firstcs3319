@@ -9,13 +9,19 @@ SELECT DISTINCT city FROM customer;
 SELECT * FROM agent ORDER BY city;
 
 -- Query 4
-SELECT firstName, lastName FROM customer WHERE city='Springfield';
+SELECT firstName, lastName 
+	FROM customer 
+	WHERE city='Springfield';
 
 -- Query 5
-SELECT lastName FROM customer WHERE agentID='11';
+SELECT lastName 
+	FROM customer 
+	WHERE agentID='11';
  
 -- Query 6
-SELECT description FROM product WHERE description LIKE '%pad%' OR description LIKE '%Pad%';
+SELECT description 
+	FROM product 
+	WHERE description LIKE '%pad%' OR description LIKE '%Pad%';
 
 -- Query 7
 SELECT lastName, description, pur.quantity
@@ -23,12 +29,15 @@ SELECT lastName, description, pur.quantity
 	ON c.customerID=pur.customerID AND pur.productID=pro.productID; 
 
 -- Query 8
-SELECT SUM(quantity) AS 'Homer\'s Total Purchases' FROM purchase p INNER JOIN customer c
+SELECT SUM(quantity) AS 'Homer\'s Total Purchases' 
+	FROM purchase p INNER JOIN customer c
 	ON c.firstName='Homer' AND c.customerID=p.customerID;
 
 -- Query 9
-SELECT DISTINCT SUM(quantity) AS 'Total purchases For', firstName, lastName From purchase p JOIN customer c
-	ON c.customerID=p.customerID GROUP BY firstName, lastName;
+SELECT DISTINCT SUM(quantity) AS 'Total purchases For', firstName, lastName 
+	FROM purchase p JOIN customer c
+	ON c.customerID=p.customerID 
+	GROUP BY firstName, lastName;
 
 -- Query 10
 SELECT description, pro.quantity 
@@ -47,16 +56,30 @@ SELECT DISTINCT description, quantity FROM product LEFT JOIN
 
 -- Query 12
 
-SELECT c.firstName AS 'Customer First Name', c.lastName AS 'Customer Last Name', a.firstName AS 'Agent First Name', a.lastName AS 'Agent Last Name' FROM agent a JOIN customer c WHERE c.city=a.city;
+SELECT c.firstName AS 'Customer First Name', c.lastName AS 'Customer Last Name', a.firstName AS 'Agent First Name', a.lastName AS 'Agent Last Name' 
+	FROM agent a JOIN customer c 
+	WHERE c.city=a.city;
 
 -- Query 13
 
-SELECT SUM(quantity) AS 'All Knee Pads Purchased' FROM purchase WHERE productID='78';
+SELECT SUM(quantity) AS 'All Knee Pads Purchased' 
+	FROM purchase 
+	WHERE productID='78';
 
 -- Query 14
 
-SELECT description, count(*) AS Bought FROM purchase JOIN product ON purchase.productID=product.productID GROUP BY purchase.productID HAVING Bought>3;
+SELECT description, count(*) AS Bought 
+	FROM purchase JOIN product 
+	ON purchase.productID=product.productID 
+	GROUP BY purchase.productID 
+	HAVING Bought>3;
 
 -- Query 15
 
-SELECT a.firstName, a.lastName FROM agent a JOIN (SELECT agentID FROM customer c JOIN purchase p ON p.customerID=c.customerID WHERE p.productID='78') AS kpb ON a.agentID=kpb.agentID;
+SELECT a.firstName, a.lastName 
+	FROM agent a JOIN 
+	(SELECT agentID 
+		FROM customer c JOIN purchase p 
+		ON p.customerID=c.customerID 
+		WHERE p.productID='78') AS kpb 
+	ON a.agentID=kpb.agentID;
